@@ -3,6 +3,8 @@ const users = [];
 const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
+  var color;
+  var turn;
 
   const existingUser = users.find(
     (user) => user.room === room && user.name === name
@@ -16,7 +18,15 @@ const addUser = ({ id, name, room }) => {
     return { error: "Room is full" };
   }
 
-  const user = { id, name, room };
+  if (users.length == 0) {
+    color = "red";
+    turn = true;
+  } else {
+    color = "blue";
+    turn = false;
+  }
+
+  const user = { id, name, room, color, turn };
 
   users.push(user);
 
