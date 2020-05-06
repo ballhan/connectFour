@@ -1,5 +1,6 @@
-html, body {
-  font-family: 'Roboto', sans-serif;
+html,
+body {
+  font-family: "Roboto", sans-serif;
   padding: 0;
   margin: 0;
 }
@@ -18,57 +19,59 @@ html, body {
   text-align: center;
   height: 100vh;
   align-items: center;
-  background-color: #1A1A1D;
+  background-color: #1a1a1d;
+  flex-direction: column;
 }
 
 .joinInnerContainer {
   width: 20%;
+  height: 50%;
 }
 
 .joinInput {
-  border-radius: 0;
-  padding: 15px 20px;
+  border-radius: 5px;
+  padding: 15px;
   width: 100%;
+  font-size: 15px;
 }
 
 .heading {
   color: white;
-  font-size: 2.5em;
-  padding-bottom: 10px;
-  border-bottom: 2px solid white;
-}
-
-.description {
-  color: white;
-  font-size: 1.2em;
-  padding-bottom: 10px;
+  font-size: 50px;
 }
 
 .button {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #2979FF;
-  padding: 20px;
-  border-radius: 5px;
-  display: inline-block;
-  border: none;
   width: 100%;
+  font-size: 20px !important;
 }
 
 .mt-20 {
-  margin-top: 20px;
+  margin-top: 20px !important;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 825px) and (max-width: 1244px) {
+  .joinInnerContainer {
+    width: 30%;
+  }
+}
+
+@media (min-width: 620px) and (max-width: 824px) {
+  .joinInnerContainer {
+    width: 40%;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 619px) {
+  .joinInnerContainer {
+    width: 50%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 499px) {
   .joinOuterContainer {
     height: 100%;
   }
   .joinInnerContainer {
     width: 90%;
   }
-}
-
-button:focus {
-  outline: 0;
 }
