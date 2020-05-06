@@ -54,7 +54,9 @@ const Main = ({ location }) => {
     <div className="outerContainer">
       <h1 className="header">Room {room}</h1>
       <InfoContainer users={users} />
-      <div className="gameContainer"></div>
+      <div className="gameContainer">
+        <Game />
+      </div>
     </div>
   );
 };

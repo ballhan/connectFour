@@ -1,0 +1,12 @@
+.board-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.board {
+  background-color: grey;
+  padding: 20px;
+  border: solid white 3px;
+  border-radius: 5px;
+}

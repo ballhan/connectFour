@@ -1,0 +1,11 @@
+.square {
+  align-items: center;
+  color: white;
+  background-color: grey;
+  padding: 5px;
+}
+
+.colorIcon {
+  font-size: 60px !important;
+  border-radius: 60px;
+}
