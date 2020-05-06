@@ -3,9 +3,7 @@ import queryString from "query-string";
 import io from "socket.io-client";
 
 import TextContainer from "../TextContainer/TextContainer";
-import Messages from "../Messages/Messages";
-import InfoBar from "../InfoBar/InfoBar";
-import Input from "../Input/Input";
+import Game from "../Game/Game";
 
 import "./Main.css";
 
@@ -54,16 +52,11 @@ const Main = ({ location }) => {
 
   return (
     <div className="outerContainer">
-      <div className="container">
-        <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-        <Input
-          message={message}
-          setMessage={setMessage}
-          sendMessage={sendMessage}
-        />
-      </div>
+      <h1 className="header" room={room}>
+        Room {room}
+      </h1>
       <TextContainer users={users} />
+      <div className="gameContainer"></div>
     </div>
   );
 };
