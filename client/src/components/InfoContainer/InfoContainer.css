@@ -1,5 +1,21 @@
-.container {
+.userContainer {
   display: flex;
   flex-direction: row !important;
+  align-items: center;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: white;
+  font-size: 25px;
+  border: solid white 3px;
+  border-radius: 5px;
+  background-color: grey;
+  margin: 0px 50px;
+}
+
+.colorIcon {
+  font-size: 50px !important;
 }

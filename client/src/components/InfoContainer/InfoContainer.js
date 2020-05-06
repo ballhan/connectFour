@@ -1,21 +1,22 @@
 import React from "react";
-
+import Brightness1Icon from "@material-ui/icons/Brightness1";
 import "./InfoContainer.css";
 
 const InfoContainer = ({ users }) => (
-  <div className="container">
+  <div>
     {users ? (
-      <div>
-        <h2>
-          {users.map(({ name, color, turn }) => (
+      <div className="userContainer">
+        {users.map(({ name, color, turn }) => (
+          <div key={(name, color, turn)} className="infoContainer">
+            <div>{name}</div>
             <div>
-              <div key={(name, color, turn)}>
-                {name}
-                {color}
-              </div>
+              <Brightness1Icon
+                className="colorIcon"
+                style={{ color: color }}
+              ></Brightness1Icon>
             </div>
-          ))}
-        </h2>
+          </div>
+        ))}
       </div>
     ) : null}
   </div>
