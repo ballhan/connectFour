@@ -30,7 +30,7 @@ export default function SignIn() {
         </div>
         <Link
           onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-          to={`/chat?name=${name}&room=${room}`}
+          to={`/main?name=${name}&room=${room}`}
         >
           <Button
             variant="contained"
