@@ -1,4 +1,4 @@
-.board-row {
+.boardRow {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -9,4 +9,9 @@
   padding: 20px;
   border: solid white 3px;
   border-radius: 5px;
+}
+
+.status {
+  font-size: 30px;
+  color: white;
 }

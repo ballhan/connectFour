@@ -1,13 +1,13 @@
 import React from "react";
 import Brightness1Icon from "@material-ui/icons/Brightness1";
 
-import "./Square.css";
+import styles from "./Square.module.css";
 
 class Square extends React.Component {
   render() {
     return (
-      <div className="square">
-        <Brightness1Icon className="colorIcon"></Brightness1Icon>
+      <div className={styles.square}>
+        <Brightness1Icon className={styles.colorIcon}></Brightness1Icon>
       </div>
     );
   }

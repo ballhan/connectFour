@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import InfoContainer from "../InfoContainer/InfoContainer";
 import Game from "../Game/Game";
 
-import "./Main.css";
+import styles from "./Main.module.css";
 
 let socket;
 
@@ -51,10 +51,10 @@ const Main = ({ location }) => {
   };
 
   return (
-    <div className="outerContainer">
-      <h1 className="header">Room {room}</h1>
+    <div className={styles.outerContainer}>
+      <h1 className={styles.header}>Room {room}</h1>
       <InfoContainer users={users} />
-      <div className="gameContainer">
+      <div className={styles.gameContainer}>
         <Game />
       </div>
     </div>
