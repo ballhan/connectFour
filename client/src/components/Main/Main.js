@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 
-import TextContainer from "../TextContainer/TextContainer";
+import InfoContainer from "../InfoContainer/InfoContainer";
 import Game from "../Game/Game";
 
 import "./Main.css";
@@ -52,10 +52,8 @@ const Main = ({ location }) => {
 
   return (
     <div className="outerContainer">
-      <h1 className="header" room={room}>
-        Room {room}
-      </h1>
-      <TextContainer users={users} />
+      <h1 className="header">Room {room}</h1>
+      <InfoContainer users={users} />
       <div className="gameContainer"></div>
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 
-import "./TextContainer.css";
+import "./InfoContainer.css";
 
-const TextContainer = ({ users }) => (
-  <div className="textContainer">
+const InfoContainer = ({ users }) => (
+  <div className="container">
     {users ? (
-      <div className="userContainer">
+      <div>
         <h2>
           {users.map(({ name, color, turn }) => (
             <div>
@@ -21,4 +21,4 @@ const TextContainer = ({ users }) => (
   </div>
 );
 
-export default TextContainer;
+export default InfoContainer;
