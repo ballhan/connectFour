@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import classNames from "classnames";
 
 import styles from "./Join.module.css";
 
@@ -23,7 +24,10 @@ export default function SignIn() {
         <div>
           <input
             placeholder="Room"
-            className={(styles.joinInput, styles.mt20)}
+            className={classNames({
+              [styles.joinInput]: true,
+              [styles.mt20]: true,
+            })}
             type="text"
             onChange={(event) => setRoom(event.target.value)}
           />
@@ -35,7 +39,10 @@ export default function SignIn() {
           <Button
             variant="contained"
             color="primary"
-            className={(styles.button, styles.mt20)}
+            className={classNames({
+              [styles.button]: true,
+              [styles.mt20]: true,
+            })}
             type="submit"
           >
             play
