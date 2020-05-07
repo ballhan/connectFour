@@ -16,8 +16,7 @@ class Game extends React.Component {
           <div key={name} className={styles.status}>
             <div>{name}'s Turn</div>
           </div>
-        ))}):null} */}{" "}
-        */}
+        ))}):null} */}
         <div className={styles.board}>
           <div className={styles.boardRow}>
             {this.renderSquare(0)}
