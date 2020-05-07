@@ -1,5 +1,5 @@
 import React from "react";
-import Brightness1Icon from "@material-ui/icons/Brightness1";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import styles from "./InfoContainer.module.css";
 
 const InfoContainer = ({ users }) => (
@@ -10,10 +10,10 @@ const InfoContainer = ({ users }) => (
           <div key={(name, color, turn)} className={styles.infoContainer}>
             <div>{name}</div>
             <div>
-              <Brightness1Icon
+              <EmojiPeopleIcon
                 className={styles.colorIcon}
                 style={{ color: color }}
-              ></Brightness1Icon>
+              ></EmojiPeopleIcon>
             </div>
           </div>
         ))}
