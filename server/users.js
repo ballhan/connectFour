@@ -41,12 +41,12 @@ const addUser = ({ id, name, room }) => {
     firstPlayer.status = "Move";
 
     color = "blue";
-    status = "Waiting";
+    status = "Wait";
 
     rooms[roomIndex].roomUser = 2;
   } else {
     color = "red";
-    status = "Waiting for player to join";
+    status = "Waiting for second player to join";
     rooms.push(roomObject);
   }
 
@@ -81,7 +81,7 @@ const removeRoom = (id, room) => {
         (user) => user.room === room && user.id !== id
       );
       users[otherUserIndex].color = "red";
-      users[otherUserIndex].status = "Waiting for player to join";
+      users[otherUserIndex].status = "Waiting for other player to join";
     }
   }
 };
