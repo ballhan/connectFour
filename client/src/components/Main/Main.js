@@ -51,12 +51,9 @@ const Main = ({ location }) => {
   };
 
   return (
-    <div className={styles.outerContainer}>
-      <h1 className={styles.header}>Room {room}</h1>
-      <InfoContainer users={users} />
-      <div className={styles.gameContainer}>
-        <Game users={users} />
-      </div>
+    <div className={styles.container}>
+      <InfoContainer room={room} users={users} />
+      <Game users={users} />
     </div>
   );
 };

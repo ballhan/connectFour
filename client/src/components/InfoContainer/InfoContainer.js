@@ -2,8 +2,9 @@ import React from "react";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import styles from "./InfoContainer.module.css";
 
-const InfoContainer = ({ users }) => (
+const InfoContainer = ({ room, users }) => (
   <div>
+    <h1 className={styles.header}>Room {room}</h1>
     {users ? (
       <div className={styles.userContainer}>
         {users.map(({ name, color, turn }) => (
@@ -15,6 +16,7 @@ const InfoContainer = ({ users }) => (
                 style={{ color: color }}
               ></EmojiPeopleIcon>
             </div>
+            <h1 className={styles.infoText}>Move</h1>
           </div>
         ))}
       </div>

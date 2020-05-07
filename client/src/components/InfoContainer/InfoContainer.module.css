@@ -1,7 +1,14 @@
+.header {
+  color: white;
+  font-size: 50px;
+  text-align: center;
+}
+
 .userContainer {
   display: flex;
   flex-direction: row !important;
   align-items: center;
+  margin: 5px;
 }
 
 .infoContainer {
@@ -10,10 +17,12 @@
   align-items: center;
   color: white;
   font-size: 25px;
-  border: solid white 3px;
-  border-radius: 5px;
-  background-color: grey;
   margin: 0px 50px;
+  padding: 10px;
+}
+
+.infoText {
+  font-size: 20px;
 }
 
 .colorIcon {
