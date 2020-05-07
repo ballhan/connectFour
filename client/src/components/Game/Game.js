@@ -9,11 +9,15 @@ class Game extends React.Component {
   }
 
   render() {
-    const status = "Red Player's Move";
-
     return (
       <div className={styles.container}>
-        <div className={styles.status}>{status}</div>
+        {/* <div className={styles.status}>{this.props.users[0].name}'s Turn</div>
+        {/* {users ? ({users.map(({ name }) => (
+          <div key={name} className={styles.status}>
+            <div>{name}'s Turn</div>
+          </div>
+        ))}):null} */}{" "}
+        */}
         <div className={styles.board}>
           <div className={styles.boardRow}>
             {this.renderSquare(0)}

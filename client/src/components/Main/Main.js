@@ -55,7 +55,7 @@ const Main = ({ location }) => {
       <h1 className={styles.header}>Room {room}</h1>
       <InfoContainer users={users} />
       <div className={styles.gameContainer}>
-        <Game />
+        <Game users={users} />
       </div>
     </div>
   );

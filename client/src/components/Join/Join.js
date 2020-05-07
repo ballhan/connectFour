@@ -33,12 +33,13 @@ export default function SignIn() {
           />
         </div>
         <Link
+          className={styles.buttonText}
           onClick={(e) => (!name || !room ? e.preventDefault() : null)}
           to={`/main?name=${name}&room=${room}`}
         >
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classNames({
               [styles.button]: true,
               [styles.mt20]: true,
