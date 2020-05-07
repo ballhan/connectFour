@@ -1,23 +1,18 @@
+//array of user object
 const users = [];
-//array of roomObject to check if room is full
+//array of room Object, Purpose: to check if room is full
 const rooms = [];
 
 const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
   var color;
-  var turn;
+  var status;
+
+  //init roomobject to update room status
   var roomObject = { roomName: room, roomUser: 1 };
 
-  const roomFull = rooms.find(
-    (room) => room.roomName === roomObject.roomName && room.roomUser == 2
-  );
-
-  //if room is not full find the index to change usernumber
-  const roomIndex = rooms.findIndex(
-    (room) => room.roomName === roomObject.roomName
-  );
-
+  //check if user exist
   const existingUser = users.find(
     (user) => user.room === room && user.name === name
   );
@@ -26,19 +21,36 @@ const addUser = ({ id, name, room }) => {
     return { error: "Username is taken" };
   }
 
+  //check if room is full
+  const roomFull = rooms.find(
+    (room) => room.roomName === roomObject.roomName && room.roomUser == 2
+  );
+
   if (roomFull) {
     return { error: "Room is full" };
-  } else if (roomIndex !== -1) {
+  }
+
+  //if room is not full, check if room already existed
+  const roomIndex = rooms.findIndex(
+    (room) => room.roomName === roomObject.roomName
+  );
+
+  //if room exist, update first player, second player, room user count, else create set up first player, create room
+  if (roomIndex !== -1) {
+    var firstPlayer = users.filter((user) => user.room === room)[0];
+    firstPlayer.status = "Move";
+
     color = "blue";
-    turn = false;
+    status = "Waiting";
+
     rooms[roomIndex].roomUser = 2;
   } else {
     color = "red";
-    turn = true;
+    status = "Waiting for player to join";
     rooms.push(roomObject);
   }
 
-  const user = { id, name, room, color, turn };
+  const user = { id, name, room, color, status };
 
   users.push(user);
 
@@ -60,6 +72,7 @@ const removeRoom = (id, room) => {
   var otherUserIndex;
 
   if (roomIndex !== -1) {
+    //if no other user is left
     if (rooms[roomIndex].roomUser === 1) {
       return rooms.splice(roomIndex, 1)[0];
     } else {
@@ -68,6 +81,7 @@ const removeRoom = (id, room) => {
         (user) => user.room === room && user.id !== id
       );
       users[otherUserIndex].color = "red";
+      users[otherUserIndex].status = "Waiting for player to join";
     }
   }
 };
