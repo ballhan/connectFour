@@ -1,17 +1,22 @@
-.boardRow {
+.button {
+  background-color: #303030;
+  color: #50c8ff;
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+  text-align: center;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
 }
 
-.board {
-  background-color: grey;
-  padding: 20px;
-  border: solid white 3px;
-  border-radius: 5px;
-}
-
-.status {
-  font-size: 30px;
+.message {
+  text-align: center;
+  font-size: 17px;
   color: white;
 }
