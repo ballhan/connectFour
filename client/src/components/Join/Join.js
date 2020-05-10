@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 import styles from "./Join.module.css";
 
-export default function SignIn() {
+const Join = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
 
@@ -52,4 +52,6 @@ export default function SignIn() {
       </div>
     </div>
   );
-}
+};
+
+export default Join;
