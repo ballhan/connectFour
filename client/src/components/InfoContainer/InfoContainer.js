@@ -4,7 +4,7 @@ import styles from "./InfoContainer.module.css";
 
 const InfoContainer = ({ room, users }) => (
   <div>
-    <h1 className={styles.header}>Room {room}</h1>
+    <div className={styles.header}>Room {room}</div>
     {users ? (
       <div className={styles.userContainer}>
         {users.map(({ name, color, status }) => (
@@ -16,7 +16,7 @@ const InfoContainer = ({ room, users }) => (
                 style={{ color: color }}
               ></EmojiPeopleIcon>
             </div>
-            <h1 className={styles.infoText}>{status}</h1>
+            <div className={styles.infoText}>{status}</div>
           </div>
         ))}
       </div>

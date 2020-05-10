@@ -1,7 +1,7 @@
 .cell {
   height: 70px;
   width: 70px;
-  background-color: #1990ff;
+  border: none;
   display: flex;
   flex-direction: row;
   justify-content: center;

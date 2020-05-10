@@ -1,5 +1,5 @@
 import React from "react";
-import Brightness1Icon from "@material-ui/icons/Brightness1";
+import Button from "@material-ui/core/Button";
 import Row from "../Row/Row";
 
 import styles from "./Game.module.css";
@@ -180,26 +180,33 @@ class Game extends React.Component {
 
   render() {
     return (
-      <div>
-        <div
-          className={styles.button}
-          onClick={() => {
-            this.initBoard();
-          }}
-        >
-          Restart
-        </div>
-
+      <div className={styles.container}>
         <table>
-          <thead></thead>
-          <tbody>
+          <tbody className={styles.tableContainer}>
             {this.state.board.map((row, i) => (
               <Row key={i} row={row} play={this.play} />
             ))}
           </tbody>
         </table>
 
-        <p className={styles.message}>{this.state.message}</p>
+        <div className={styles.buttonContainer}>
+          <div className={styles.button}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                this.initBoard();
+              }}
+            >
+              Restart
+            </Button>
+          </div>
+          <div className={styles.button}>
+            <Button variant="contained" color="secondary">
+              Leave
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
