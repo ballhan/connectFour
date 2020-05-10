@@ -7,7 +7,6 @@ const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
   var color;
-  var status;
 
   //init roomobject to update room status
   var roomObject = { roomName: room, roomUser: 1 };
@@ -35,22 +34,17 @@ const addUser = ({ id, name, room }) => {
     (room) => room.roomName === roomObject.roomName
   );
 
-  //if room exist, update first player, second player, room user count, else create set up first player, create room
+  //if room exist, second player, room user count, else create set up first player, create room
   if (roomIndex !== -1) {
-    var firstPlayer = users.filter((user) => user.room === room)[0];
-    firstPlayer.status = "Move";
-
     color = "blue";
-    status = "Wait";
 
     rooms[roomIndex].roomUser = 2;
   } else {
     color = "red";
-    status = "Waiting for second player";
     rooms.push(roomObject);
   }
 
-  const user = { id, name, room, color, status };
+  const user = { id, name, room, color };
 
   users.push(user);
 
@@ -81,7 +75,6 @@ const removeRoom = (id, room) => {
         (user) => user.room === room && user.id !== id
       );
       users[otherUserIndex].color = "red";
-      users[otherUserIndex].status = "Waiting for second player";
     }
   }
 };

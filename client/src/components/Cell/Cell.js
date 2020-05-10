@@ -10,7 +10,7 @@ const Cell = ({ value, columnIndex, play }) => {
           play(columnIndex);
         }}
       >
-        <div className={value == 1 ? styles.red : styles.white}></div>
+        <div className={value === 1 ? styles.red : styles.white}></div>
       </div>
     </td>
   );

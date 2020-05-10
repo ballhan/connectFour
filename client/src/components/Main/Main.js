@@ -12,6 +12,7 @@ let socket;
 const Main = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const [roomFull, setRoomFull] = useState();
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -39,6 +40,7 @@ const Main = ({ location }) => {
 
     socket.on("roomData", ({ users }) => {
       setUsers(users);
+      setRoomFull(users.length === 2);
     });
   }, []);
 
@@ -53,7 +55,7 @@ const Main = ({ location }) => {
   return (
     <div className={styles.container}>
       <InfoContainer room={room} users={users} />
-      <Game users={users} />
+      <Game name={name} roomFull={roomFull} users={users} />
     </div>
   );
 };

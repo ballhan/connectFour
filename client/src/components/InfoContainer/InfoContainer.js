@@ -7,8 +7,8 @@ const InfoContainer = ({ room, users }) => (
     <div className={styles.header}>Room {room}</div>
     {users ? (
       <div className={styles.userContainer}>
-        {users.map(({ name, color, status }) => (
-          <div key={(name, color, status)} className={styles.infoContainer}>
+        {users.map(({ name, color }) => (
+          <div key={(name, color)} className={styles.infoContainer}>
             <div>{name}</div>
             <div>
               <EmojiPeopleIcon
@@ -16,7 +16,6 @@ const InfoContainer = ({ room, users }) => (
                 style={{ color: color }}
               ></EmojiPeopleIcon>
             </div>
-            <div className={styles.infoText}>{status}</div>
           </div>
         ))}
       </div>
