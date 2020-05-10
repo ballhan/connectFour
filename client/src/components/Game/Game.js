@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 import Row from "../Row/Row";
 
 import styles from "./Game.module.css";
@@ -202,9 +203,11 @@ class Game extends React.Component {
             </Button>
           </div>
           <div className={styles.button}>
-            <Button variant="contained" color="secondary">
-              Leave
-            </Button>
+            <Link to={`/`} className={styles.buttonText}>
+              <Button variant="contained" color="secondary">
+                Leave
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

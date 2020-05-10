@@ -14,6 +14,10 @@
   align-items: center;
 }
 
+.buttonText {
+  text-decoration: none;
+}
+
 .button {
   padding: 10px;
 }
