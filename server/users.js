@@ -1,9 +1,6 @@
-//require initBoard to initBoard in roomObject
-const { initBoard } = require("./game");
-
 //array of user object
 const users = [];
-//array of room Object, containing roomname, roomuser, board, firstplayer
+//array of room Object, containing roomname, roomuser, firstplayer
 const rooms = [];
 
 const addUser = ({ id, name, room }) => {
@@ -11,13 +8,10 @@ const addUser = ({ id, name, room }) => {
   room = room.trim().toLowerCase();
   var color;
 
-  var board = initBoard();
-
   //init roomobject to update room status
   const roomObject = {
     roomName: room,
     roomUser: 1,
-    board: board,
     firstPlayer: "",
   };
 

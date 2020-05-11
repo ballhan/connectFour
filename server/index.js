@@ -10,7 +10,7 @@ const {
   getUsersInRoom,
 } = require("./users");
 
-const { checkWin, togglePlayer } = require("./game");
+const { initBoard, updateBoard, updateMove, checkWin } = require("./game");
 
 const PORT = process.env.PORT || 5000;
 
@@ -23,14 +23,11 @@ const io = socketio(server);
 io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const { error, user, roomObject } = addUser({ id: socket.id, name, room });
+    const board = initBoard();
 
     if (error) return callback(error);
 
     socket.join(user.room);
-
-    socket.emit("userData", {
-      color: user.color,
-    });
 
     io.to(user.room).emit("roomData", {
       room: user.room,
@@ -38,7 +35,7 @@ io.on("connection", (socket) => {
     });
 
     io.to(user.room).emit("gameData", {
-      board: roomObject.board,
+      board: board,
       firstPlayer: roomObject.firstPlayer,
       move: true,
     });
@@ -46,16 +43,17 @@ io.on("connection", (socket) => {
     callback();
   });
 
-  socket.on("updateGame", (firstPlay) => {
+  socket.on("updateGame", (columnIndex, move, color, board) => {
+    console.log(columnIndex, move, color, board);
     const user = getUser(socket.id);
-
-    console.log(user, firstPlay);
-    // var board = board;
-    // var firstPlayer = togglePlayer(firstPlayer, player, opponent);
-    // var winner = checkWin(board);
+    var updatedBoard = updateBoard(board, columnIndex, color);
+    var updatedMove = updateMove(move);
+    var winner = checkWin(board);
 
     io.to(user.room).emit("updatedGame", {
-      firstPlay: firstPlay,
+      board: updatedBoard,
+      move: updatedMove,
+      winner: winner,
     });
   });
 

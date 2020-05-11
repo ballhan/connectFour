@@ -7,23 +7,22 @@ import styles from "./Game.module.css";
 
 const Game = ({
   name,
-  color,
   roomFull,
   users,
   boardArray,
   firstPlayer,
   updateGame,
   move,
+  winner,
 }) => {
   //set player to yourself
   const [player, setPlayer] = useState();
   const [board, setBoard] = useState();
-  const [cellColor, setCellColor] = useState("");
   const [opponent, setOpponent] = useState("");
   const [firstPlay, setFirstPlay] = useState("");
   const [message, setMessage] = useState("");
-  const [winner, setWinner] = useState("");
-
+  const [win, setWin] = useState("");
+  console.log("reallyupdated", boardArray, move, winner);
   useEffect(() => {
     setPlayer(name);
   }, [name]);
@@ -31,10 +30,6 @@ const Game = ({
   useEffect(() => {
     setBoard(boardArray);
   }, [boardArray]);
-
-  useEffect(() => {
-    setCellColor(color);
-  }, [color]);
 
   useEffect(() => {
     setFirstPlay(firstPlayer);
@@ -59,7 +54,7 @@ const Game = ({
   }, [move]);
 
   useEffect(() => {
-    setWinner("");
+    setWin("");
   }, [winner]);
 
   const initBoard = () => {
@@ -77,7 +72,6 @@ const Game = ({
   console.log(
     "me:",
     player,
-    cellColor,
     "roomfull:",
     roomFull,
     "opponent:",
@@ -90,41 +84,12 @@ const Game = ({
     board
   );
 
-  const play = (columnIndex, move) => {
-    console.log(winner);
-    if (winner === "") {
-      updateGame(columnIndex, move);
-      // Place piece on board
-      var board = board;
-      for (let r = 5; r >= 0; r--) {
-        if (!board[r][columnIndex]) {
-          board[r][columnIndex] = color;
-          break;
-        }
-      }
-
-      // sendData();
-
-      // // Check status of board
-      // let result = checkAll(board);
-      // if (result === player) {
-      //   setBoard(board);
-      //   setGameOver(true);
-      //   setMessage(`${player} WINS`);
-      // } else if (result === opponent) {
-      //   setBoard(board);
-      //   setGameOver(true);
-      //   setMessage(`${opponent} WINS`);
-      // } else if (result === "draw") {
-      //   setBoard(board);
-      //   setGameOver(true);
-      //   setMessage("Draw");
-      // } else {
-      //   setBoard(board);
-      //   setCurrentPlayer(togglePlayer());
-      // }
+  const play = (e, columnIndex, move, color) => {
+    console.log("color, ", color);
+    if (win === "") {
+      updateGame(e, columnIndex, move, color, board);
     } else {
-      setMessage("Game over. Please start a new game.");
+      setMessage(`Game over, ${win} win`);
     }
   };
 

@@ -12,12 +12,12 @@ let socket;
 const Main = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
-  const [color, setColor] = useState("");
   const [move, setMove] = useState();
   const [roomFull, setRoomFull] = useState();
   const [users, setUsers] = useState();
   const [boardArray, setBoardArray] = useState();
   const [firstPlayer, setFirstPlayer] = useState("");
+  const [winner, setWinner] = useState("");
   const ENDPOINT = "localhost:5000";
 
   useEffect(() => {
@@ -36,14 +36,7 @@ const Main = ({ location }) => {
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    socket.on("userData", ({ color }) => {
-      setColor(color);
-    });
-  }, []);
-
-  useEffect(() => {
-    socket.on("roomData", ({ color, users }) => {
-      setColor(color);
+    socket.on("roomData", ({ users }) => {
       setUsers(users);
       setRoomFull(users.length === 2);
     });
@@ -57,13 +50,16 @@ const Main = ({ location }) => {
     });
   }, []);
 
-  const updateGame = (event, firstPlay) => {
+  const updateGame = (event, columnIndex, move, color, board) => {
     event.preventDefault();
 
-    socket.emit("updateGame", firstPlay);
+    socket.emit("updateGame", columnIndex, move, color, board);
 
-    socket.on("updatedGame", ({ firstPlay }) => {
-      console.log("client", firstPlay);
+    socket.on("updatedGame", ({ board, move, winner }) => {
+      setBoardArray(board);
+      setMove(move);
+      setWinner(winner);
+      console.log("updated", board, move, winner);
     });
   };
 
@@ -72,13 +68,13 @@ const Main = ({ location }) => {
       <InfoContainer room={room} users={users} />
       <Game
         name={name}
-        color={color}
         roomFull={roomFull}
         users={users}
         boardArray={boardArray}
         firstPlayer={firstPlayer}
         updateGame={updateGame}
         move={move}
+        winner={winner}
       />
     </div>
   );

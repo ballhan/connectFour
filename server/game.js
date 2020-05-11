@@ -99,8 +99,18 @@ const checkWin = (board) => {
   );
 };
 
-const togglePlayer = (currentPlayer, player, opponent) => {
-  return currentPlayer === player ? opponent : player;
+const updateMove = (move) => {
+  return move ? false : true;
 };
 
-module.exports = { initBoard, checkWin, togglePlayer };
+const updateBoard = (board, column, color) => {
+  for (let r = 5; r >= 0; r--) {
+    if (!board[r][column]) {
+      board[r][column] = color;
+      break;
+    }
+  }
+  return board;
+};
+
+module.exports = { initBoard, checkWin, updateBoard, updateMove };
