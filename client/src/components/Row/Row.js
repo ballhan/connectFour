@@ -2,7 +2,7 @@ import React from "react";
 import Cell from "../Cell/Cell";
 
 // Row component
-const Row = ({ row, play, player, firstPlayer, move }) => {
+const Row = ({ row, play, player, firstPlayer, move, winner }) => {
   return (
     <tr>
       {row.map((cell, i) => (
@@ -14,6 +14,7 @@ const Row = ({ row, play, player, firstPlayer, move }) => {
           player={player}
           firstPlayer={firstPlayer}
           move={move}
+          winner={winner}
         />
       ))}
     </tr>

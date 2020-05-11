@@ -21,8 +21,7 @@ const Game = ({
   const [opponent, setOpponent] = useState("");
   const [firstPlay, setFirstPlay] = useState("");
   const [message, setMessage] = useState("");
-  const [win, setWin] = useState("");
-  console.log("reallyupdated", boardArray, move, winner);
+
   useEffect(() => {
     setPlayer(name);
   }, [name]);
@@ -56,10 +55,6 @@ const Game = ({
     }
   }, [move]);
 
-  useEffect(() => {
-    setWin("");
-  }, [winner]);
-
   const initBoard = () => {
     var boardArray = [];
     for (let r = 0; r < 6; r++) {
@@ -87,12 +82,11 @@ const Game = ({
   //   board
   // );
 
-  const play = (e, columnIndex, move, color) => {
-    console.log("color, ", color);
-    if (win === "") {
-      updateGame(e, columnIndex, move, color, board);
+  const play = (e, columnIndex, move, color, winner) => {
+    if (winner === "blue" || winner === "red") {
+      setMessage(`Game over, ${winner} win`);
     } else {
-      setMessage(`Game over, ${win} win`);
+      updateGame(e, columnIndex, move, color, board);
     }
   };
 
@@ -110,6 +104,7 @@ const Game = ({
                   player={player}
                   firstPlayer={firstPlay}
                   move={move}
+                  winner={winner}
                 />
               ))
             : null}
