@@ -7,11 +7,14 @@
 .message {
   color: white;
   font-size: 20px;
-  padding: 5px;
+  padding: 10px;
 }
 
-.tableContainer {
+.table {
   background-color: #545454;
+  padding: 5px;
+  border-radius: 15px;
+  border: solid #888888;
 }
 
 .buttonContainer {

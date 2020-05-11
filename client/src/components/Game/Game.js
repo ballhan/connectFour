@@ -40,14 +40,14 @@ const Game = ({
     if (!roomFull) {
       setMessage(`Waiting for opponent to join`);
     } else if (winner === "red" || winner === "blue") {
-      setMessage(`Game over, ${winner} win`);
+      setMessage(`Game over, ${winner} Wins`);
     } else if (
       (player === firstPlay && move === true) ||
       (player !== firstPlay && move === false)
     ) {
-      setMessage(`My turn`);
+      setMessage(`You turn`);
     } else {
-      setMessage(`Waiting for opponent to move`);
+      setMessage(`Waiting for opponent's move`);
     }
   }, [player, firstPlay, move, roomFull, winner]);
 
@@ -62,7 +62,7 @@ const Game = ({
   return (
     <div className={styles.container}>
       <div className={styles.message}>{message}</div>
-      <table>
+      <table className={styles.table}>
         <tbody className={styles.tableContainer}>
           {board
             ? board.map((row, i) => (
