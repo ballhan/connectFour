@@ -56,6 +56,17 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on("restart", () => {
+    const user = getUser(socket.id);
+    const newBoard = initBoard();
+
+    io.to(user.room).emit("gameData", {
+      board: newBoard,
+      firstPlayer: roomObject.firstPlayer,
+      move: true,
+    });
+  });
+
   socket.on("leaveRoom", () => {
     const room = getUser(socket.id).room;
     //remove room first then user

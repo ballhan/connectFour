@@ -85,8 +85,8 @@ const Game = ({
           <Button
             variant="contained"
             color="primary"
-            onClick={() => {
-              restart();
+            onClick={(e) => {
+              restart(e);
             }}
           >
             Restart

@@ -58,6 +58,8 @@ const Main = ({ location }) => {
 
   const restart = (event) => {
     event.preventDefault();
+
+    socket.emit("restart");
   };
 
   const leave = () => {
