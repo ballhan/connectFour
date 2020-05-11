@@ -1,3 +1,26 @@
+# 4 in a Row game (React, Express, Node and Socket.IO)
+
+## To run game locally
+
+1.  Open a terminal and navigate to the root of the application.
+
+2.  `cd server`
+
+3.  `npm start`
+
+4.  Open another terminal and navigate to the root of the application.
+
+5.  `cd client`
+
+6.  `npm start`
+
+## Preview
+
+<img src="readmeImage/1.png">
+<img src="readmeImage/2.png">
+<img src="readmeImage/3.png">
+<img src="readmeImage/4.png">
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
