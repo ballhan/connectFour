@@ -1,4 +1,4 @@
-# 4 in a Row game (React, Express, Node and Socket.IO)
+# 4 in a Row (React, Express, Node and Socket.IO)
 
 ## To run game locally
 
