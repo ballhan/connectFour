@@ -27,7 +27,7 @@ const Cell = ({
       setPlayerColor("red");
       setActive(false);
     }
-  }, [move]);
+  }, [player, firstPlayer, move]);
 
   return (
     <td>

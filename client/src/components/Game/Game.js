@@ -18,7 +18,6 @@ const Game = ({
   //set player to yourself
   const [player, setPlayer] = useState();
   const [board, setBoard] = useState();
-  const [opponent, setOpponent] = useState("");
   const [firstPlay, setFirstPlay] = useState("");
   const [message, setMessage] = useState("");
 
@@ -34,13 +33,6 @@ const Game = ({
     setFirstPlay(firstPlayer);
   }, [firstPlayer]);
 
-  //if roomfull, setup opponent name, status change if roomFull change
-  useEffect(() => {
-    if (roomFull) {
-      setOpponent(users.filter((user) => user.name !== name)[0].name);
-    }
-  }, [roomFull]);
-
   //message
   useEffect(() => {
     if (!roomFull) {
@@ -53,7 +45,7 @@ const Game = ({
     } else {
       setMessage(`Waiting for opponent to move`);
     }
-  }, [move]);
+  }, [player, firstPlay, move, roomFull]);
 
   const initBoard = () => {
     var boardArray = [];
@@ -66,21 +58,6 @@ const Game = ({
     }
     return boardArray;
   };
-
-  // console.log(
-  //   "me:",
-  //   player,
-  //   "roomfull:",
-  //   roomFull,
-  //   "opponent:",
-  //   opponent,
-  //   "firstplay:",
-  //   firstPlay,
-  //   "move",
-  //   move,
-  //   "board",
-  //   board
-  // );
 
   const play = (e, columnIndex, move, color, winner) => {
     if (winner === "blue" || winner === "red") {
