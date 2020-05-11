@@ -12,6 +12,7 @@ let socket;
 const Main = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const [color, setColor] = useState("");
   const [roomFull, setRoomFull] = useState();
   const [users, setUsers] = useState();
   const [boardArray, setBoardArray] = useState();
@@ -34,7 +35,14 @@ const Main = ({ location }) => {
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    socket.on("roomData", ({ users }) => {
+    socket.on("userData", ({ color }) => {
+      setColor(color);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on("roomData", ({ color, users }) => {
+      setColor(color);
       setUsers(users);
       setRoomFull(users.length === 2);
     });
@@ -62,6 +70,7 @@ const Main = ({ location }) => {
       <InfoContainer room={room} users={users} />
       <Game
         name={name}
+        color={color}
         roomFull={roomFull}
         users={users}
         boardArray={boardArray}

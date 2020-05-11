@@ -28,12 +28,16 @@ io.on("connection", (socket) => {
 
     socket.join(user.room);
 
+    socket.emit("userData", {
+      color: user.color,
+    });
+
     io.to(user.room).emit("roomData", {
       room: user.room,
       users: getUsersInRoom(user.room),
     });
 
-    socket.emit("gameData", {
+    io.to(user.room).emit("gameData", {
       board: roomObject.board,
       firstPlayer: roomObject.firstPlayer,
     });

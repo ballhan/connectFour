@@ -7,6 +7,7 @@ import styles from "./Game.module.css";
 
 const Game = ({
   name,
+  color,
   roomFull,
   users,
   boardArray,
@@ -16,8 +17,9 @@ const Game = ({
   //set player to yourself
   const [player, setPlayer] = useState();
   const [board, setBoard] = useState();
+  const [cellColor, setCellColor] = useState("");
   const [opponent, setOpponent] = useState("");
-  const [firstPlay, setFirstPlay] = useState();
+  const [firstPlay, setFirstPlay] = useState("");
   const [move, setMove] = useState("");
   const [message, setMessage] = useState("");
   const [winner, setWinner] = useState("");
@@ -29,6 +31,10 @@ const Game = ({
   useEffect(() => {
     setBoard(boardArray);
   }, [boardArray]);
+
+  useEffect(() => {
+    setCellColor(color);
+  }, [color]);
 
   useEffect(() => {
     setFirstPlay(firstPlayer);
@@ -43,12 +49,14 @@ const Game = ({
 
   //if you are current play, you are able to make move
   useEffect(() => {
-    if (player === firstPlay) {
-      setMove(true);
-    } else {
-      setMove(false);
+    if (roomFull) {
+      if (player === firstPlay) {
+        setMove(true);
+      } else {
+        setMove(false);
+      }
     }
-  }, []);
+  }, [firstPlay]);
 
   //message
   useEffect(() => {
@@ -59,7 +67,7 @@ const Game = ({
     } else {
       setMessage(`Waiting for opponent to move`);
     }
-  }, [roomFull]);
+  }, [move]);
 
   const initBoard = () => {
     var boardArray = [];
@@ -76,6 +84,7 @@ const Game = ({
   console.log(
     "me:",
     player,
+    cellColor,
     "roomfull:",
     roomFull,
     "opponent:",

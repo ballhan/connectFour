@@ -47,10 +47,10 @@ const addUser = ({ id, name, room }) => {
   //if room exist, user is second player, increase room user count, else create set up first player color, first player, create room
   if (roomIndex !== -1) {
     color = "blue";
+    roomObject.firstPlayer = name;
     rooms[roomIndex].roomUser = 2;
   } else {
     color = "red";
-    roomObject.firstPlayer = name;
     rooms.push(roomObject);
   }
 
