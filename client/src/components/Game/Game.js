@@ -9,14 +9,22 @@ import io from "socket.io-client";
 let socket;
 
 const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
-  const [board, setBoard] = useState(boardArray);
   //set player to yourself
-  const [player, setPlayer] = useState(name);
+  const [player, setPlayer] = useState();
+  const [board, setBoard] = useState(boardArray);
   const [opponent, setOpponent] = useState("");
   const [currentPlay, setCurrentPlay] = useState(currentPlayer);
   const [move, setMove] = useState("");
   const [message, setMessage] = useState("");
-  const [winer, setWiner] = useState("");
+  const [winner, setWinner] = useState("");
+
+  useEffect(() => {
+    setPlayer(name);
+  }, [name]);
+
+  useEffect(() => {
+    setBoard(boardArray);
+  }, [boardArray]);
 
   //if roomfull, setup opponent name, status change if roomFull change
   useEffect(() => {
@@ -45,18 +53,32 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
     }
   }, [roomFull]);
 
-  // console.log(
-  //   "me:",
-  //   player,
-  //   "roomfull:",
-  //   roomFull,
-  //   "opponent:",
-  //   opponent,
-  //   "currentplay:",
-  //   currentPlayer,
-  //   "move",
-  //   move
-  // );
+  const initBoard = () => {
+    var boardArray = [];
+    for (let r = 0; r < 6; r++) {
+      let row = [];
+      for (let c = 0; c < 7; c++) {
+        row.push(null);
+      }
+      boardArray.push(row);
+    }
+    return boardArray;
+  };
+
+  console.log(
+    "me:",
+    player,
+    "roomfull:",
+    roomFull,
+    "opponent:",
+    opponent,
+    "currentplay:",
+    currentPlayer,
+    "move",
+    move,
+    "board",
+    board
+  );
 
   const sendData = () => {
     socket.emit(
@@ -71,7 +93,7 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
   };
 
   const play = (c) => {
-    if (gameOver) {
+    if (winner !== "") {
       // Place piece on board
       var board = board;
       for (let r = 5; r >= 0; r--) {
@@ -117,7 +139,13 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
 
       <div className={styles.buttonContainer}>
         <div className={styles.button}>
-          <Button variant="contained" color="primary" onClick={() => {}}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setBoard(initBoard());
+            }}
+          >
             Restart
           </Button>
         </div>

@@ -26,9 +26,14 @@ io.on("connection", (socket) => {
 
     if (error) return callback(error);
 
-    socket.emit("gameData", {
+    socket.join(user.room);
+
+    io.to(user.room).emit("roomData", {
       room: user.room,
       users: getUsersInRoom(user.room),
+    });
+
+    socket.emit("gameData", {
       board: roomObject.board,
       currentPlayer: roomObject.currentPlayer,
     });

@@ -34,9 +34,14 @@ const Main = ({ location }) => {
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    socket.on("gameData", ({ users, board, currentPlayer }) => {
+    socket.on("roomData", ({ users }) => {
       setUsers(users);
       setRoomFull(users.length === 2);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on("gameData", ({ board, currentPlayer }) => {
       setBoardArray(board);
       setCurrentPlayer(currentPlayer);
     });
