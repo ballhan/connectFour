@@ -37,6 +37,8 @@ const Game = ({
   useEffect(() => {
     if (!roomFull) {
       setMessage(`Waiting for opponent to join`);
+    } else if (winner === "red" || winner === "blue") {
+      setMessage(`Game over, ${winner} win`);
     } else if (
       (player === firstPlay && move === true) ||
       (player !== firstPlay && move === false)
@@ -45,7 +47,7 @@ const Game = ({
     } else {
       setMessage(`Waiting for opponent to move`);
     }
-  }, [player, firstPlay, move, roomFull]);
+  }, [player, firstPlay, move, roomFull, winner]);
 
   const initBoard = () => {
     var boardArray = [];
@@ -61,7 +63,7 @@ const Game = ({
 
   const play = (e, columnIndex, move, color, winner) => {
     if (winner === "blue" || winner === "red") {
-      setMessage(`Game over, ${winner} win`);
+      return;
     } else {
       updateGame(e, columnIndex, move, color, board);
     }
