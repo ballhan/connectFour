@@ -128,11 +128,11 @@ const Game = ({
     <div className={styles.container}>
       <div className={styles.message}>{message}</div>
       <table>
-        {/* <tbody className={styles.tableContainer}>
-          {board.map((row, i) => (
-            <Row key={i} row={row} move={move} />
-          ))}
-        </tbody> */}
+        <tbody className={styles.tableContainer}>
+          {board
+            ? board.map((row, i) => <Row key={i} row={row} move={move} />)
+            : null}
+        </tbody>
       </table>
 
       <div className={styles.buttonContainer}>

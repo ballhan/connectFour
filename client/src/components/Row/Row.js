@@ -6,7 +6,7 @@ const Row = ({ row, play, move }) => {
   return (
     <tr>
       {row.map((cell, i) => (
-        <Cell key={i} value={cell} columnIndex={i} play={play} move={move} />
+        <Cell key={i} color={cell} columnIndex={i} play={play} move={move} />
       ))}
     </tr>
   );
