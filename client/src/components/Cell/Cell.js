@@ -18,7 +18,7 @@ const Cell = ({ color, columnIndex, play, player, firstPlayer, move }) => {
         className={styles.cell}
         onClick={(e) => (!active ? e.preventDefault() : play(columnIndex))}
       >
-        <div className={`styles.${color}`}></div>
+        <div className={styles.circle} style={{ backgroundColor: color }}></div>
       </div>
     </td>
   );
