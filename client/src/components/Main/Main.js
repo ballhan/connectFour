@@ -13,6 +13,7 @@ const Main = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [color, setColor] = useState("");
+  const [move, setMove] = useState();
   const [roomFull, setRoomFull] = useState();
   const [users, setUsers] = useState();
   const [boardArray, setBoardArray] = useState();
@@ -49,9 +50,10 @@ const Main = ({ location }) => {
   }, []);
 
   useEffect(() => {
-    socket.on("gameData", ({ board, firstPlayer }) => {
+    socket.on("gameData", ({ board, firstPlayer, move }) => {
       setBoardArray(board);
       setFirstPlayer(firstPlayer);
+      setMove(move);
     });
   }, []);
 
@@ -76,6 +78,7 @@ const Main = ({ location }) => {
         boardArray={boardArray}
         firstPlayer={firstPlayer}
         updateGame={updateGame}
+        move={move}
       />
     </div>
   );

@@ -13,6 +13,7 @@ const Game = ({
   boardArray,
   firstPlayer,
   updateGame,
+  move,
 }) => {
   //set player to yourself
   const [player, setPlayer] = useState();
@@ -20,7 +21,6 @@ const Game = ({
   const [cellColor, setCellColor] = useState("");
   const [opponent, setOpponent] = useState("");
   const [firstPlay, setFirstPlay] = useState("");
-  const [move, setMove] = useState("");
   const [message, setMessage] = useState("");
   const [winner, setWinner] = useState("");
 
@@ -47,27 +47,20 @@ const Game = ({
     }
   }, [roomFull]);
 
-  //if you are current play, you are able to make move
-  useEffect(() => {
-    if (roomFull) {
-      if (player === firstPlay) {
-        setMove(true);
-      } else {
-        setMove(false);
-      }
-    }
-  }, [firstPlay]);
-
   //message
   useEffect(() => {
     if (!roomFull) {
       setMessage(`Waiting for opponent to join`);
-    } else if (move === true) {
+    } else if (player === firstPlay && move === true) {
       setMessage(`My turn`);
     } else {
       setMessage(`Waiting for opponent to move`);
     }
   }, [move]);
+
+  useEffect(() => {
+    setWinner("");
+  }, [winner]);
 
   const initBoard = () => {
     var boardArray = [];
@@ -97,13 +90,15 @@ const Game = ({
     board
   );
 
-  const play = (c) => {
-    if (winner !== "") {
+  const play = (columnIndex, move) => {
+    console.log(winner);
+    if (winner === "") {
+      updateGame(columnIndex, move);
       // Place piece on board
       var board = board;
       for (let r = 5; r >= 0; r--) {
-        if (!board[r][c]) {
-          board[r][c] = player;
+        if (!board[r][columnIndex]) {
+          board[r][columnIndex] = color;
           break;
         }
       }
@@ -139,23 +134,21 @@ const Game = ({
       <table>
         <tbody className={styles.tableContainer}>
           {board
-            ? board.map((row, i) => <Row key={i} row={row} move={move} />)
+            ? board.map((row, i) => (
+                <Row
+                  key={i}
+                  row={row}
+                  play={play}
+                  player={player}
+                  firstPlayer={firstPlay}
+                  move={move}
+                />
+              ))
             : null}
         </tbody>
       </table>
 
       <div className={styles.buttonContainer}>
-        <div className={styles.button}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={(event) => {
-              updateGame(event, firstPlay);
-            }}
-          >
-            update
-          </Button>
-        </div>
         <div className={styles.button}>
           <Button
             variant="contained"

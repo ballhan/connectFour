@@ -40,6 +40,7 @@ io.on("connection", (socket) => {
     io.to(user.room).emit("gameData", {
       board: roomObject.board,
       firstPlayer: roomObject.firstPlayer,
+      move: true,
     });
 
     callback();
