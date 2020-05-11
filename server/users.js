@@ -1,6 +1,9 @@
+//require initBoard to initBoard in roomObject
+const { initBoard } = require("./game");
+
 //array of user object
 const users = [];
-//array of room Object, Purpose: to check if room is full
+//array of room Object, containing roomname, roomuser, board, currentplayers
 const rooms = [];
 
 const addUser = ({ id, name, room }) => {
@@ -8,8 +11,15 @@ const addUser = ({ id, name, room }) => {
   room = room.trim().toLowerCase();
   var color;
 
+  var board = initBoard();
+
   //init roomobject to update room status
-  var roomObject = { roomName: room, roomUser: 1 };
+  const roomObject = {
+    roomName: room,
+    roomUser: 1,
+    board: board,
+    currentPlayer: "",
+  };
 
   //check if user exist
   const existingUser = users.find(
@@ -20,7 +30,7 @@ const addUser = ({ id, name, room }) => {
     return { error: "Username is taken" };
   }
 
-  //check if room is full
+  //check if room exist and is full
   const roomFull = rooms.find(
     (room) => room.roomName === roomObject.roomName && room.roomUser == 2
   );
@@ -29,18 +39,18 @@ const addUser = ({ id, name, room }) => {
     return { error: "Room is full" };
   }
 
-  //if room is not full, check if room already existed
+  //check if room already existed
   const roomIndex = rooms.findIndex(
     (room) => room.roomName === roomObject.roomName
   );
 
-  //if room exist, second player, room user count, else create set up first player, create room
+  //if room exist, user is second player, increase room user count, else create set up first player color, current player, create room
   if (roomIndex !== -1) {
     color = "blue";
-
     rooms[roomIndex].roomUser = 2;
   } else {
     color = "red";
+    roomObject.currentPlayer = name;
     rooms.push(roomObject);
   }
 
@@ -48,7 +58,7 @@ const addUser = ({ id, name, room }) => {
 
   users.push(user);
 
-  return { user };
+  return { user, roomObject };
 };
 
 const removeUser = (id) => {
@@ -70,11 +80,14 @@ const removeRoom = (id, room) => {
     if (rooms[roomIndex].roomUser === 1) {
       return rooms.splice(roomIndex, 1)[0];
     } else {
+      //update roomUser, color, currentPlayer
       rooms[roomIndex].roomUser = 1;
+
       otherUserIndex = users.findIndex(
         (user) => user.room === room && user.id !== id
       );
       users[otherUserIndex].color = "red";
+      rooms[roomIndex].currentPlayer = users[otherUserIndex].name;
     }
   }
 };

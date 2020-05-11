@@ -13,9 +13,9 @@ const Main = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [roomFull, setRoomFull] = useState();
-  const [users, setUsers] = useState("");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState();
+  const [boardArray, setBoardArray] = useState();
+  const [currentPlayer, setCurrentPlayer] = useState("");
   const ENDPOINT = "localhost:5000";
 
   useEffect(() => {
@@ -34,28 +34,24 @@ const Main = ({ location }) => {
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages((messages) => [...messages, message]);
-    });
-
-    socket.on("roomData", ({ users }) => {
+    socket.on("gameData", ({ users, board, currentPlayer }) => {
       setUsers(users);
       setRoomFull(users.length === 2);
+      setBoardArray(board);
+      setCurrentPlayer(currentPlayer);
     });
   }, []);
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-
-    if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
-    }
-  };
 
   return (
     <div className={styles.container}>
       <InfoContainer room={room} users={users} />
-      <Game name={name} roomFull={roomFull} users={users} />
+      <Game
+        name={name}
+        roomFull={roomFull}
+        users={users}
+        boardArray={boardArray}
+        currentPlayer={currentPlayer}
+      />
     </div>
   );
 };
