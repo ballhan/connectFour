@@ -56,6 +56,14 @@ const Main = ({ location }) => {
     socket.emit("updateGame", columnIndex, move, color, board);
   };
 
+  const restart = (event) => {
+    event.preventDefault();
+  };
+
+  const leave = () => {
+    socket.emit("leaveRoom");
+  };
+
   useEffect(() => {
     socket.on("updatedGame", ({ board, move, winner }) => {
       setBoardArray(board);
@@ -74,6 +82,8 @@ const Main = ({ location }) => {
         boardArray={boardArray}
         firstPlayer={firstPlayer}
         updateGame={updateGame}
+        restart={restart}
+        leave={leave}
         move={move}
         winner={winner}
       />

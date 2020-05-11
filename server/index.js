@@ -56,6 +56,20 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on("leaveRoom", () => {
+    const room = getUser(socket.id).room;
+    //remove room first then user
+    removeRoom(socket.id, room);
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit("roomData", {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
+    }
+  });
+
   socket.on("disconnect", () => {
     const room = getUser(socket.id).room;
     //remove room first then user

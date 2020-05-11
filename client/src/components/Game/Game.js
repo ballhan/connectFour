@@ -12,6 +12,8 @@ const Game = ({
   boardArray,
   firstPlayer,
   updateGame,
+  restart,
+  leave,
   move,
   winner,
 }) => {
@@ -49,18 +51,6 @@ const Game = ({
     }
   }, [player, firstPlay, move, roomFull, winner]);
 
-  const initBoard = () => {
-    var boardArray = [];
-    for (let r = 0; r < 6; r++) {
-      let row = [];
-      for (let c = 0; c < 7; c++) {
-        row.push(null);
-      }
-      boardArray.push(row);
-    }
-    return boardArray;
-  };
-
   const play = (e, columnIndex, move, color, winner) => {
     if (winner === "blue" || winner === "red") {
       return;
@@ -96,7 +86,7 @@ const Game = ({
             variant="contained"
             color="primary"
             onClick={() => {
-              setBoard(initBoard());
+              restart();
             }}
           >
             Restart
@@ -104,7 +94,13 @@ const Game = ({
         </div>
         <div className={styles.button}>
           <Link to={`/`} className={styles.buttonText}>
-            <Button variant="contained" color="secondary">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                leave();
+              }}
+            >
               Leave
             </Button>
           </Link>
