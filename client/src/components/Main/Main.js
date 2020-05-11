@@ -15,7 +15,7 @@ const Main = ({ location }) => {
   const [roomFull, setRoomFull] = useState();
   const [users, setUsers] = useState();
   const [boardArray, setBoardArray] = useState();
-  const [currentPlayer, setCurrentPlayer] = useState("");
+  const [firstPlayer, setFirstPlayer] = useState("");
   const ENDPOINT = "localhost:5000";
 
   useEffect(() => {
@@ -41,11 +41,21 @@ const Main = ({ location }) => {
   }, []);
 
   useEffect(() => {
-    socket.on("gameData", ({ board, currentPlayer }) => {
+    socket.on("gameData", ({ board, firstPlayer }) => {
       setBoardArray(board);
-      setCurrentPlayer(currentPlayer);
+      setFirstPlayer(firstPlayer);
     });
   }, []);
+
+  const updateGame = (event, firstPlay) => {
+    event.preventDefault();
+
+    socket.emit("updateGame", firstPlay);
+
+    socket.on("updatedGame", ({ firstPlay }) => {
+      console.log("client", firstPlay);
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -55,7 +65,8 @@ const Main = ({ location }) => {
         roomFull={roomFull}
         users={users}
         boardArray={boardArray}
-        currentPlayer={currentPlayer}
+        firstPlayer={firstPlayer}
+        updateGame={updateGame}
       />
     </div>
   );

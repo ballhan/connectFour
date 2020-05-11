@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 import Row from "../Row/Row";
 
 import styles from "./Game.module.css";
-import io from "socket.io-client";
 
-let socket;
-
-const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
+const Game = ({
+  name,
+  roomFull,
+  users,
+  boardArray,
+  firstPlayer,
+  updateGame,
+}) => {
   //set player to yourself
   const [player, setPlayer] = useState();
-  const [board, setBoard] = useState(boardArray);
+  const [board, setBoard] = useState();
   const [opponent, setOpponent] = useState("");
-  const [currentPlay, setCurrentPlay] = useState(currentPlayer);
+  const [firstPlay, setFirstPlay] = useState();
   const [move, setMove] = useState("");
   const [message, setMessage] = useState("");
   const [winner, setWinner] = useState("");
@@ -26,6 +30,10 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
     setBoard(boardArray);
   }, [boardArray]);
 
+  useEffect(() => {
+    setFirstPlay(firstPlayer);
+  }, [firstPlayer]);
+
   //if roomfull, setup opponent name, status change if roomFull change
   useEffect(() => {
     if (roomFull) {
@@ -35,18 +43,18 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
 
   //if you are current play, you are able to make move
   useEffect(() => {
-    if (player === currentPlayer) {
+    if (player === firstPlay) {
       setMove(true);
     } else {
       setMove(false);
     }
-  }, [currentPlayer]);
+  }, []);
 
   //message
   useEffect(() => {
     if (!roomFull) {
       setMessage(`Waiting for opponent to join`);
-    } else if (currentPlayer === player) {
+    } else if (move === true) {
       setMessage(`My turn`);
     } else {
       setMessage(`Waiting for opponent to move`);
@@ -72,25 +80,13 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
     roomFull,
     "opponent:",
     opponent,
-    "currentplay:",
-    currentPlayer,
+    "firstplay:",
+    firstPlay,
     "move",
     move,
     "board",
     board
   );
-
-  const sendData = () => {
-    socket.emit(
-      "sendData",
-      board,
-      currentPlayer,
-      player,
-      opponent,
-      winner,
-      () => {}
-    );
-  };
 
   const play = (c) => {
     if (winner !== "") {
@@ -98,10 +94,12 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
       var board = board;
       for (let r = 5; r >= 0; r--) {
         if (!board[r][c]) {
-          board[r][c] = currentPlayer;
+          board[r][c] = player;
           break;
         }
       }
+
+      // sendData();
 
       // // Check status of board
       // let result = checkAll(board);
@@ -138,6 +136,17 @@ const Game = ({ name, roomFull, users, boardArray, currentPlayer }) => {
       </table>
 
       <div className={styles.buttonContainer}>
+        <div className={styles.button}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={(event) => {
+              updateGame(event, firstPlay);
+            }}
+          >
+            update
+          </Button>
+        </div>
         <div className={styles.button}>
           <Button
             variant="contained"

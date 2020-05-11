@@ -3,7 +3,7 @@ const { initBoard } = require("./game");
 
 //array of user object
 const users = [];
-//array of room Object, containing roomname, roomuser, board, currentplayers
+//array of room Object, containing roomname, roomuser, board, firstplayer
 const rooms = [];
 
 const addUser = ({ id, name, room }) => {
@@ -18,7 +18,7 @@ const addUser = ({ id, name, room }) => {
     roomName: room,
     roomUser: 1,
     board: board,
-    currentPlayer: "",
+    firstPlayer: "",
   };
 
   //check if user exist
@@ -44,13 +44,13 @@ const addUser = ({ id, name, room }) => {
     (room) => room.roomName === roomObject.roomName
   );
 
-  //if room exist, user is second player, increase room user count, else create set up first player color, current player, create room
+  //if room exist, user is second player, increase room user count, else create set up first player color, first player, create room
   if (roomIndex !== -1) {
     color = "blue";
     rooms[roomIndex].roomUser = 2;
   } else {
     color = "red";
-    roomObject.currentPlayer = name;
+    roomObject.firstPlayer = name;
     rooms.push(roomObject);
   }
 
@@ -80,14 +80,14 @@ const removeRoom = (id, room) => {
     if (rooms[roomIndex].roomUser === 1) {
       return rooms.splice(roomIndex, 1)[0];
     } else {
-      //update roomUser, color, currentPlayer
+      //update roomUser, color, firstPlayer
       rooms[roomIndex].roomUser = 1;
 
       otherUserIndex = users.findIndex(
         (user) => user.room === room && user.id !== id
       );
       users[otherUserIndex].color = "red";
-      rooms[roomIndex].currentPlayer = users[otherUserIndex].name;
+      rooms[roomIndex].firstPlayer = users[otherUserIndex].name;
     }
   }
 };

@@ -35,28 +35,24 @@ io.on("connection", (socket) => {
 
     socket.emit("gameData", {
       board: roomObject.board,
-      currentPlayer: roomObject.currentPlayer,
+      firstPlayer: roomObject.firstPlayer,
     });
 
     callback();
   });
 
-  socket.on(
-    "sendData",
-    (board, currentPlayer, player, opponent, winner, callback) => {
-      var board = board;
-      var currentPlayer = togglePlayer(currentPlayer, player, opponent);
-      var winner = checkWin(board);
+  socket.on("updateGame", (firstPlay) => {
+    const user = getUser(socket.id);
 
-      io.to(user.room).emit("sendData", {
-        board: board,
-        currentPlayer: currentPlayer,
-        winner: winner,
-      });
+    console.log(user, firstPlay);
+    // var board = board;
+    // var firstPlayer = togglePlayer(firstPlayer, player, opponent);
+    // var winner = checkWin(board);
 
-      callback();
-    }
-  );
+    io.to(user.room).emit("updatedGame", {
+      firstPlay: firstPlay,
+    });
+  });
 
   socket.on("disconnect", () => {
     const room = getUser(socket.id).room;
