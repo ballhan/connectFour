@@ -46,7 +46,10 @@ const Game = ({
   useEffect(() => {
     if (!roomFull) {
       setMessage(`Waiting for opponent to join`);
-    } else if (player === firstPlay && move === true) {
+    } else if (
+      (player === firstPlay && move === true) ||
+      (player !== firstPlay && move === false)
+    ) {
       setMessage(`My turn`);
     } else {
       setMessage(`Waiting for opponent to move`);
@@ -69,20 +72,20 @@ const Game = ({
     return boardArray;
   };
 
-  console.log(
-    "me:",
-    player,
-    "roomfull:",
-    roomFull,
-    "opponent:",
-    opponent,
-    "firstplay:",
-    firstPlay,
-    "move",
-    move,
-    "board",
-    board
-  );
+  // console.log(
+  //   "me:",
+  //   player,
+  //   "roomfull:",
+  //   roomFull,
+  //   "opponent:",
+  //   opponent,
+  //   "firstplay:",
+  //   firstPlay,
+  //   "move",
+  //   move,
+  //   "board",
+  //   board
+  // );
 
   const play = (e, columnIndex, move, color) => {
     console.log("color, ", color);

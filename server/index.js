@@ -44,7 +44,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("updateGame", (columnIndex, move, color, board) => {
-    console.log(columnIndex, move, color, board);
     const user = getUser(socket.id);
     var updatedBoard = updateBoard(board, columnIndex, color);
     var updatedMove = updateMove(move);

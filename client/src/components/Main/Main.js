@@ -54,14 +54,15 @@ const Main = ({ location }) => {
     event.preventDefault();
 
     socket.emit("updateGame", columnIndex, move, color, board);
+  };
 
+  useEffect(() => {
     socket.on("updatedGame", ({ board, move, winner }) => {
       setBoardArray(board);
       setMove(move);
       setWinner(winner);
-      console.log("updated", board, move, winner);
     });
-  };
+  }, []);
 
   return (
     <div className={styles.container}>
