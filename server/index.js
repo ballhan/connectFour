@@ -82,14 +82,16 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    const room = getUser(socket.id).room;
+    const user = getUser(socket.id);
+    const room = user.room;
+    console.log(user, room);
     //remove room first then user
     removeRoom(socket.id, room);
-    const user = removeUser(socket.id);
+    removeUser(socket.id);
 
     if (user) {
-      io.to(user.room).emit("roomData", {
-        room: user.room,
+      io.to(room).emit("roomData", {
+        room: room,
         users: getUsersInRoom(user.room),
       });
     }
