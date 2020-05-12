@@ -60,10 +60,10 @@ io.on("connection", (socket) => {
     const user = getUser(socket.id);
     const newBoard = initBoard();
 
-    io.to(user.room).emit("gameData", {
+    io.to(user.room).emit("updatedGame", {
       board: newBoard,
-      firstPlayer: roomObject.firstPlayer,
       move: true,
+      winner: "",
     });
   });
 
