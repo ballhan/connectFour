@@ -12,7 +12,7 @@ const Join = () => {
   return (
     <div className={styles.joinOuterContainer}>
       <div className={styles.joinInnerContainer}>
-        <h1 className={styles.heading}>4 in a Row</h1>
+        <h1 className={styles.heading}>Connect Four</h1>
         <div>
           <input
             placeholder="Name"
