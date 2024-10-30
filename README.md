@@ -1,7 +1,5 @@
 # Connect Four (React, Express, Node and Socket.IO)
 
-## [Live demo](https://happy-bardeen-3d6f57.netlify.app)
-
 ## To run game locally
 
 1.  Open a terminal and navigate to the root of the application.
